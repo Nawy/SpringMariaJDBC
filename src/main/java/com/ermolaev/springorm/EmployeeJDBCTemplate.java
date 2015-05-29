@@ -19,7 +19,7 @@ public class EmployeeJDBCTemplate implements EmployeeDAO {
 
 	public void create(String firstName, String lastName, Integer age,
 			String city, Float salary) {
-		String SQL = "inser into employees " +
+		String SQL = "insert into employees " +
 					 	"(firstName. lastName, age, city, salary)" +
 					 	" values (?, ?, ?, ?, ?)";
 		
