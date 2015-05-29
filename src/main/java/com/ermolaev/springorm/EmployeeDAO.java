@@ -10,6 +10,10 @@ public interface EmployeeDAO {
 	
 	public void create(String firstName, String lastName, Integer age, String city, Float salary);
 	
+	public void delete(Integer index);
+	
+	public void deleteByFirstName(String name);
+	
 	public Employee getEmployee(Integer index);
 	
 	public List<Employee> getEmployeeList();

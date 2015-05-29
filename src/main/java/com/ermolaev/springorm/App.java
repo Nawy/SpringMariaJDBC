@@ -14,15 +14,24 @@ public class App
     	EmployeeJDBCTemplate empJdbcTemp = 
     			(EmployeeJDBCTemplate)ctx.getBean("employeeJDBCTemplate");
     	
-
+    	
     	System.out.println("----------- All Employees --------------");
     	List<Employee> empList = empJdbcTemp.getEmployeeList();
     	printEmployeeList(empList);
     	
     	System.out.println("\n----------- From London --------------");
-    	List<Employee> empLondonList = empJdbcTemp.getEmployeeFromCity("London");
-    	printEmployeeList(empLondonList);
+    	empList = empJdbcTemp.getEmployeeFromCity("London");
+    	printEmployeeList(empList);
     	
+    	System.out.println("\n----------- Add New Employee --------------");
+    	empJdbcTemp.create("Demi", "Moore", 32, "New Jersey", 22000F);
+    	empList = empJdbcTemp.getEmployeeList();
+    	printEmployeeList(empList);
+    	
+    	System.out.println("\n----------- Remove Employee --------------");
+    	empJdbcTemp.deleteByFirstName("Demi");
+    	empList = empJdbcTemp.getEmployeeOrderByAge();
+    	printEmployeeList(empList);
     }
     
     private static void printEmployeeList(List<Employee> empList)

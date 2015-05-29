@@ -20,10 +20,22 @@ public class EmployeeJDBCTemplate implements EmployeeDAO {
 	public void create(String firstName, String lastName, Integer age,
 			String city, Float salary) {
 		String SQL = "insert into employees " +
-					 	"(firstName. lastName, age, city, salary)" +
+					 	"(firstName, lastName, age, city, salary)" +
 					 	" values (?, ?, ?, ?, ?)";
 		
 		jdbcTemplateObject.update(SQL, firstName, lastName, age, city, salary);
+	}
+	
+	public void delete(Integer index)
+	{
+		String SQL ="delete from employees where id = ?";
+		jdbcTemplateObject.update(SQL, index);
+	}
+	
+	public void deleteByFirstName(String name)
+	{
+		String SQL ="delete from employees where firstName = ?";
+		jdbcTemplateObject.update(SQL, name);		
 	}
 
 	public Employee getEmployee(Integer index) {
@@ -31,6 +43,12 @@ public class EmployeeJDBCTemplate implements EmployeeDAO {
 		Employee emp = jdbcTemplateObject
 				.queryForObject(SQL, new Object[]{index}, new EmployeeMapper());
 		return emp;
+	}
+	
+	public List<Employee> getEmployeeOrderByAge() {
+		String SQL = "select * from employees order by age";
+		List<Employee> empList = jdbcTemplateObject.query(SQL, new EmployeeMapper());
+		return empList;
 	}
 
 	public List<Employee> getEmployeeList() {
